@@ -3,7 +3,7 @@ import random
 import time
 
 from ptools.pms.paspa import PaSpa
-from ptools.pms.hpmser import hpmser, SeRes, SRL
+from ptools.pms.hpmser import hpmser_GX, SeRes, SRL
 
 # rastrigin function (inverted for maximum)
 def rastrigin_func(
@@ -71,12 +71,11 @@ if __name__ == '__main__':
     srl.plot()
     """
 
-    hpmser(
+    hpmser_GX(
         func=           rf,
         psd=            ranges[case],
-        L2=             True,
+        use_GX=         True,
+        distance_L2=    True,
         devices=        [None]*10,
-        #subprocess=     False,
-        hpmser_FD=      True,
         #preferred_axes= ['xa','xb'],
         verb=           1)
