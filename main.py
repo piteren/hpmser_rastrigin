@@ -1,13 +1,14 @@
 import math
 import random
 import time
+from tqdm import tqdm
 
 from ptools.pms.paspa import PaSpa
 from ptools.pms.hpmser import hpmser_GX, SeRes, SRL
 
 CASE = 'easy'
 
-STOCHASTIC_SCALE = 0
+STOCHASTIC_SCALE = 10
 
 RANGES = {
     'hardcore': { # many local minima
@@ -60,16 +61,22 @@ def rastrigin_func_3D(
 def plot_func(
         func,
         n_samples=  3000):
-
     paspa = PaSpa(psdd=RANGES[CASE])
     srl = SRL(paspa=paspa, name=f'srl_{CASE}')
-    srs = []
-    for id in range(n_samples):
-        pt = paspa.sample_point()
-        val = func(**pt ,sleep=0)
-        sr = SeRes(id=id, point=pt, score=val)
-        srs.append(sr)
+
+    points = [paspa.sample_point() for _ in range(n_samples)]
+    srs = [SeRes(id=i, point=pt, score=func(**pt ,sleep=0)) for i,pt in enumerate(points)]
+
+    s_time = time.time()
     srl.add_SR(srs)
+    print(f'{time.time()-s_time:.1f}')
+    """
+    s_time = time.time()
+    pt = paspa.sample_point()
+    srl.add_SR(SeRes(id=n_samples, point=pt, score=func(**pt ,sleep=0)))
+    print(f'{time.time()-s_time:.1f}')
+    """
+
     srl.plot()
 
 
@@ -83,8 +90,6 @@ if __name__ == '__main__':
     hpmser_GX(
         func=           rf,
         psd=            RANGES[CASE],
-        use_GX=         True,
-        distance_L2=    True,
         devices=        [None]*10,
         #preferred_axes= ['xa','xb'],
         verb=           1)
