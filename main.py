@@ -4,7 +4,7 @@ import time
 from tqdm import tqdm
 
 from ptools.pms.paspa import PaSpa
-from ptools.pms.hpmser import hpmser_GX, SeRes, SRL
+from ptools.pms.hpmser import hpmser_GX, SRL
 
 CASE = 'easy'
 
@@ -65,17 +65,20 @@ def plot_func(
     srl = SRL(paspa=paspa, name=f'srl_{CASE}')
 
     points = [paspa.sample_point() for _ in range(n_samples)]
-    srs = [SeRes(id=i, point=pt, score=func(**pt ,sleep=0)) for i,pt in enumerate(points)]
+    for pt in tqdm(points): srl.add_result(point=pt, score=func(**pt, sleep=0), force_no_update=True)
+    #srl.print_distances()
 
     s_time = time.time()
-    srl.add_SR(srs)
+    print('sorting...')
+    srl.smooth_and_sort()
     print(f'{time.time()-s_time:.1f}')
-    """
+
+    #"""
     s_time = time.time()
     pt = paspa.sample_point()
-    srl.add_SR(SeRes(id=n_samples, point=pt, score=func(**pt ,sleep=0)))
+    srl.add_result(point=pt, score=func(**pt, sleep=0))
     print(f'{time.time()-s_time:.1f}')
-    """
+    #"""
 
     srl.plot()
 
@@ -84,9 +87,9 @@ if __name__ == '__main__':
 
     rf = rastrigin_func_3D if '3D' in CASE else rastrigin_func
 
-    #plot_func(rf)
+    plot_func(rf)
 
-    #"""
+    """
     hpmser_GX(
         func=           rf,
         psd=            RANGES[CASE],
