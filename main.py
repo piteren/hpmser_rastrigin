@@ -73,13 +73,6 @@ def plot_func(
     srl.smooth_and_sort()
     print(f'{time.time()-s_time:.1f}')
 
-    #"""
-    s_time = time.time()
-    pt = paspa.sample_point()
-    srl.add_result(point=pt, score=func(**pt, sleep=0))
-    print(f'{time.time()-s_time:.1f}')
-    #"""
-
     srl.plot()
 
 
@@ -87,9 +80,9 @@ if __name__ == '__main__':
 
     rf = rastrigin_func_3D if '3D' in CASE else rastrigin_func
 
-    plot_func(rf)
+    #plot_func(rf)
 
-    """
+    #"""
     hpmser_GX(
         func=           rf,
         psd=            RANGES[CASE],
