@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     rf = rastrigin_func_3D if '3D' in CASE else rastrigin_func
 
-    #plot_func(rf)
+    plot_func(rf)
 
     #"""
     hpmser_GX(
