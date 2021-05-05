@@ -6,36 +6,12 @@ from tqdm import tqdm
 from ptools.pms.paspa import PaSpa
 from ptools.pms.hpmser import hpmser_GX, SRL
 
-CASE = 'easy'
-
+NDIM = 2
+RANGE = 1.0
 STOCHASTIC_SCALE = 10
 
-RANGES = {
-    'hardcore': { # many local minima
-        'xa':   [-5.0, 5.0],
-        'xb':   [-5.0, 5.0]},
-    'hard': { # some local minima
-        'xa':   [-2.0, 2.0],
-        'xb':   [-2.0, 2.0]},
-    'easy': { # one local minima
-        'xa':   [-0.5, 0.5],
-        'xb':   [-0.5, 0.5]},
-    'hardcore_3D': { # some local minima
-        'xa':   [-5.0, 5.0],
-        'xb':   [-5.0, 5.0],
-        'xc':   [-5.0, 5.0]},
-    'hard_3D': { # some local minima
-        'xa':   [-2.0, 2.0],
-        'xb':   [-2.0, 2.0],
-        'xc':   [-2.0, 2.0]},
-    'easy_3D': { # one local minima
-        'xa':   [-0.5, 0.5],
-        'xb':   [-0.5, 0.5],
-        'xc':   [-0.5, 0.5]}}
-
-
 # rastrigin function (inverted for maximum)
-def rastrigin_func(
+def rastrigin_func_2D(
         xa: float,
         xb: float,
         const_a=    10,
@@ -46,26 +22,26 @@ def rastrigin_func(
     return -result
 
 # rastrigin function (inverted for maximum)
-def rastrigin_func_3D(
-        xa: float,
-        xb: float,
-        xc: float,
+def rastrigin_func_ndim(
         const_a=    10,
-        sleep=      1):
+        sleep=      1,
+        **params):
     if sleep: time.sleep(sleep)
-    result = 2*const_a + xa**2 - const_a*math.cos(2*math.pi*xa) + xb**2 - const_a*math.cos(2*math.pi*xb)  + xc**2 - const_a*math.cos(2*math.pi*xc)
+    sub_values = [params[p]**2 - const_a*math.cos(2*math.pi*params[p]) for p in params]
+    result = 2*const_a +sum(sub_values)
     if STOCHASTIC_SCALE: result += STOCHASTIC_SCALE*random.random()
     return -result
 
 # plots some samples of func
 def plot_func(
-        func,
-        n_samples=  3000):
-    paspa = PaSpa(psdd=RANGES[CASE])
-    srl = SRL(paspa=paspa, name=f'srl_{CASE}')
+        psd: dict,
+        n_samples=3000):
+
+    paspa = PaSpa(psd=psd)
+    srl = SRL(paspa=paspa, name=f'srl_{NDIM}_{RANGE}_{STOCHASTIC_SCALE}')
 
     points = [paspa.sample_point() for _ in range(n_samples)]
-    for pt in tqdm(points): srl.add_result(point=pt, score=func(**pt, sleep=0), force_no_update=True)
+    for pt in tqdm(points): srl.add_result(point=pt, score=rastrigin_func_ndim(**pt, sleep=0), force_no_update=True)
     #srl.print_distances()
 
     s_time = time.time()
@@ -78,15 +54,20 @@ def plot_func(
 
 if __name__ == '__main__':
 
-    rf = rastrigin_func_3D if '3D' in CASE else rastrigin_func
+    psd = {f'p{n}': [-RANGE,RANGE] for n in range(NDIM)}
+    """
+       {'p0':   [-0.5, 0.5],
+        'p1':   [-0.5, 0.5],
+        'p2':   [-0.5, 0.5]}
+    """
 
-    plot_func(rf)
+    plot_func(psd)
 
-    #"""
+    """
     hpmser_GX(
-        func=           rf,
-        psd=            RANGES[CASE],
+        func=           rastrigin_func_ndim,
+        psd=            psd,
         devices=        [None]*10,
-        #preferred_axes= ['xa','xb'],
+        #preferred_axes= ['p1','p2'],
         verb=           1)
     #"""
