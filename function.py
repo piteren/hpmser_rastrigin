@@ -47,7 +47,7 @@ def plot_func(
 
     psdd = get_psdd(ndim, rng)
     paspa = PaSpa(psdd=psdd)
-    srl = SRL(paspa=paspa, name=f'srl_{NDIM}_{PARAM_RNG}_{STOCHASTIC_SCALE}')
+    srl = SRL(paspa=paspa, name=f'srl_{ndim}_{rng}_{sscl}')
 
     points = [paspa.sample_point() for _ in range(n_samples)]
     for pt in tqdm(points): srl.add_result(
