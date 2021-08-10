@@ -15,4 +15,4 @@ if __name__ == '__main__':
         psd=            psdd,
         devices=        [None]*3,
         #preferred_axes= ['p1','p2'],
-        verb=           1)
+        verb=           2)
