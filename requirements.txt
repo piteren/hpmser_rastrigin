@@ -9,4 +9,4 @@ rouge
 scipy
 sklearn
 spacy
-tensorflow-gpu==1.15.4
+tensorflow
