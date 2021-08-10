@@ -9,9 +9,10 @@ from ptools.pms.hpmser import SRL
 from psdd import get_psdd
 
 # function options
-STOCHASTIC_SCALE = 10
-NDIM = 2
-PARAM_RNG = 1.0
+STOCHASTIC_SCALE =  10
+NDIM =              2
+PARAM_RNG =         1.0
+SLEEP =             5
 
 
 # rastrigin function (inverted for maximum)
@@ -20,7 +21,7 @@ def rastrigin_func_2D(
         xb: float,
         const_a=    10,
         sscl=       STOCHASTIC_SCALE,
-        sleep=      1):
+        sleep: int= SLEEP):
     if sleep: time.sleep(sleep)
     result = 2*const_a + xa**2 - const_a*math.cos(2*math.pi*xa) + xb**2 - const_a*math.cos(2*math.pi*xb)
     if sscl: result += sscl * random.random()
@@ -30,7 +31,7 @@ def rastrigin_func_2D(
 def rastrigin_func_ndim(
         const_a=    10,
         sscl=       STOCHASTIC_SCALE,
-        sleep=      1,
+        sleep: int= SLEEP,
         **params):
     if sleep: time.sleep(sleep)
     sub_values = [params[p]**2 - const_a*math.cos(2*math.pi*params[p]) for p in params]

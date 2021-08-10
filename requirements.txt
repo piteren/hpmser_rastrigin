@@ -5,6 +5,7 @@ nltk
 numpy
 pandas
 plotly
+psutil
 rouge
 scipy
 sklearn

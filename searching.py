@@ -13,6 +13,6 @@ if __name__ == '__main__':
     hpmser_GX(
         func=           rastrigin_func_ndim,
         psd=            psdd,
-        devices=        [None]*10,
+        devices=        [None]*3,
         #preferred_axes= ['p1','p2'],
         verb=           1)
