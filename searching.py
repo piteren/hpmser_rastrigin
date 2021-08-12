@@ -8,7 +8,6 @@ from function import rastrigin_func_ndim
 if __name__ == '__main__':
 
     psdd = get_psdd(n_dim=2, rng=0.7)
-    print(psdd)
 
     hpmser_GX(
         func=           rastrigin_func_ndim,
