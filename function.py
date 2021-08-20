@@ -4,7 +4,7 @@ import time
 from tqdm import tqdm
 
 from ptools.pms.paspa import PaSpa
-from ptools.pms.hpmser import SRL
+from ptools.pms.hpmser.search_results import SRL
 
 from psdd import get_psdd
 

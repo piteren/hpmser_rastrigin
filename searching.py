@@ -1,4 +1,4 @@
-from ptools.pms.hpmser import hpmser_GX
+from ptools.pms.hpmser.search_function import hpmser_GX
 
 from psdd import get_psdd
 from function import rastrigin_func_ndim
@@ -14,4 +14,4 @@ if __name__ == '__main__':
         psd=            psdd,
         devices=        [None]*3,
         #preferred_axes= ['p1','p2'],
-        verb=           2)
+        verb=           1)
