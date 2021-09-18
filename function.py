@@ -29,9 +29,9 @@ def rastrigin_func_2D(
 
 # rastrigin function (inverted for maximum)
 def rastrigin_func_ndim(
-        const_a=    10,
-        sscl=       STOCHASTIC_SCALE,
-        sleep: int= SLEEP,
+        const_a=        10,
+        sscl=           STOCHASTIC_SCALE,
+        sleep: int=     SLEEP,
         **params):
     if sleep: time.sleep(sleep)
     sub_values = [params[p]**2 - const_a*math.cos(2*math.pi*params[p]) for p in params]
