@@ -9,21 +9,14 @@ if __name__ == '__main__':
 
     psdd = get_psdd(n_dim=2, rng=0.7)
 
-    """
-    hpmser_GX(
-        func=           rastrigin_func_ndim,
-        func_defaults=  {'sleep':None},
-        psdd=           psdd,
-        devices=        [None]*20,
-        #preferred_axes= ['p1','p2'],
-        verb=           1)
-    """
+    #hpmser_func = hpmser_GX
+    hpmser_func = hpmser_GX_OMP
 
-    hpmser_GX_OMP(
+    hpmser_func(
         func=           rastrigin_func_ndim,
         func_defaults=  {'sleep':None},
         psdd=           psdd,
         devices=        [None]*20,
         #n_loops=        200,
         #preferred_axes= ['p1','p2'],
-        verb=           1)
+        verb=           2)
