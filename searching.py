@@ -17,6 +17,6 @@ if __name__ == '__main__':
         func_defaults=  {'sleep':None},
         psdd=           psdd,
         devices=        [None]*20,
-        #n_loops=        200,
+        n_loops=        200,
         #preferred_axes= ['p1','p2'],
         verb=           2)
