@@ -1,4 +1,4 @@
-from ptools.pms.hpmser.search_function import hpmser_GX, hpmser_GX_OMP
+from ptools.pms.hpmser.search_function import hpmser
 
 from psdd import get_psdd
 from function import rastrigin_func_ndim
