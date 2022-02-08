@@ -50,13 +50,14 @@ def plot_func(
     paspa = PaSpa(psdd=psdd)
     srl = SRL(paspa=paspa, name=f'srl_{ndim}_{rng}_{sscl}')
 
-    points = [paspa.sample_point() for _ in range(n_samples)]
+    points = [paspa.sample_point_GX() for _ in range(n_samples)]
     for pt in tqdm(points): srl.add_result(
         point=  pt,
         score=  rastrigin_func_ndim(
             **pt,
             sscl=   sscl,
-            sleep=              0), force_no_update=True)
+            sleep=              0),
+        force_no_update=True)
 
     #srl.print_distances()
 
