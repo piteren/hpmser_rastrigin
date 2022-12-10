@@ -1,6 +1,4 @@
-
-
-from ptools.lipytools.decorators import timing
+from pypaq.lipytools.decorators import timing
 
 nums = [1]*10000
 rep = 10000

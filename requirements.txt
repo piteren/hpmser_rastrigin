@@ -1,13 +1,2 @@
-GPUtil
-Levenshtein
-matplotlib
-nltk
-numpy
-pandas
-plotly
-psutil
-rouge
-scipy
-sklearn
-spacy
-tensorflow
+# uses also pypaq/requirements.txt, you have to install them
+tqdm

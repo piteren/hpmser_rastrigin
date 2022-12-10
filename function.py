@@ -2,9 +2,10 @@ import math
 import random
 import time
 from tqdm import tqdm
+from typing import Optional
 
-from ptools.pms.paspa import PaSpa
-from ptools.pms.hpmser.search_results import SRL
+from pypaq.pms.paspa import PaSpa
+from pypaq.hpmser.search_results import SRL
 
 from psdd import get_psdd
 
@@ -29,15 +30,20 @@ def rastrigin_func_2D(
 
 # rastrigin function (inverted for maximum)
 def rastrigin_func_ndim(
-        const_a=        10,
-        sscl=           STOCHASTIC_SCALE,
-        sleep: int=     SLEEP,
+        const_a=                10,
+        sscl=                   STOCHASTIC_SCALE,
+        sleep: Optional[int]=   SLEEP,
         **params):
     if sleep: time.sleep(sleep)
     sub_values = [params[p]**2 - const_a*math.cos(2*math.pi*params[p]) for p in params]
     result = 2*const_a +sum(sub_values)
     if sscl: result += sscl * random.random()
     return -result
+
+# function to test hpmser with exception
+def func_exception(exception_prob=0.1, **kwargs):
+    if random.random() < exception_prob: raise Exception('func_exception')
+    return rastrigin_func_ndim(**kwargs)
 
 # plots some samples of func
 def plot_func(

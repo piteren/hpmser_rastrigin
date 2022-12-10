@@ -1,7 +1,8 @@
 import random
 from typing import List
 
-from ptools.lipytools.decorators import timing
+from pypaq.lipytools.decorators import timing
+
 
 @timing
 def generate(n,m) -> List[List[float]]:
