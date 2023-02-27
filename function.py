@@ -5,7 +5,7 @@ from tqdm import tqdm
 from typing import Optional
 
 from pypaq.pms.paspa import PaSpa
-from pypaq.hpmser.search_results import SRL
+from hpmser.search_results import SRL
 
 from psdd import get_psdd
 
