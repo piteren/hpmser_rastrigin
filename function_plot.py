@@ -3,14 +3,14 @@ from hpmser.search_results import SRL
 from pypaq.pms.paspa import PaSpa
 from tqdm import tqdm
 
-from function import NDIM, PARAM_RNG, STOCHASTIC_SCALE, rastrigin_func_ndim
+from function import STOCHASTIC_SCALE, rastrigin_func_ndim
 from psdd import get_psdd
 
 
 # plots some samples of func
 def plot_func(
-        ndim=       NDIM,
-        rng=        PARAM_RNG,
+        ndim: int=  2,
+        rng: float= 1.0,
         sscl=       STOCHASTIC_SCALE,
         n_samples=  3000):
 
@@ -24,7 +24,7 @@ def plot_func(
         score=  rastrigin_func_ndim(
             **pt,
             sscl=   sscl,
-            sleep=              0),
+            sleep=  0),
         force_no_update=True)
 
     #srl.print_distances()

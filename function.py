@@ -4,25 +4,23 @@ import time
 from typing import Optional
 
 # function const
-STOCHASTIC_SCALE =  10
-NDIM =              2
-PARAM_RNG =         1.0
-SLEEP =             5
+STOCHASTIC_SCALE =  10      # adds randomness to Rastrigin function
+SLEEP =             5       # adds some sleep to simulate computation process duration
 
 
-# rastrigin function (inverted for maximum)
+# Rastrigin function (inverted for maximum)
 def rastrigin_func_2D(
         xa: float,
         xb: float,
-        const_a=    10,
-        sscl=       STOCHASTIC_SCALE,
-        sleep: int= SLEEP):
+        const_a=                10,
+        sscl=                   STOCHASTIC_SCALE,
+        sleep: Optional[int]=   SLEEP):
     if sleep: time.sleep(sleep)
     result = 2*const_a + xa**2 - const_a*math.cos(2*math.pi*xa) + xb**2 - const_a*math.cos(2*math.pi*xb)
     if sscl: result += sscl * random.random()
     return -result
 
-# rastrigin function (inverted for maximum)
+# Rastrigin function (inverted for maximum)
 def rastrigin_func_ndim(
         const_a=                10,
         sscl=                   STOCHASTIC_SCALE,
