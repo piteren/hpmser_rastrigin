@@ -3,7 +3,7 @@
 
 -----------------
 
-Simple code to test **hpmser** module with Rastrigin function.
+Basic project to test **hpmser** module with Rastrigin function.
 
 **function.py** - keeps Rastrigin functions for optimization:
 - simple 2D (two dimensional - two parameters)
