@@ -3,12 +3,11 @@ import random
 import time
 from typing import Optional
 
-# function const
 STOCHASTIC_SCALE =  10      # adds randomness to Rastrigin function
 SLEEP =             5       # adds some sleep to simulate computation process duration
 
 
-# Rastrigin function (inverted for maximum)
+# Rastrigin function 2-dim, (two parameters: xa, xb), inverted for maximum
 def rastrigin_func_2D(
         xa: float,
         xb: float,
@@ -20,7 +19,7 @@ def rastrigin_func_2D(
     if sscl: result += sscl * random.random()
     return -result
 
-# Rastrigin function (inverted for maximum)
+# Rastrigin function N-dim, (N parameters given with **params) (inverted for maximum)
 def rastrigin_func_ndim(
         const_a=                10,
         sscl=                   STOCHASTIC_SCALE,
@@ -32,7 +31,7 @@ def rastrigin_func_ndim(
     if sscl: result += sscl * random.random()
     return -result
 
-# function to test hpmser with exception
+# Rastirigin + random exception
 def func_exception(exception_prob=0.1, **kwargs):
     if random.random() < exception_prob: raise Exception('func_exception')
     return rastrigin_func_ndim(**kwargs)
