@@ -4,18 +4,17 @@ from psdd import get_psdd
 from function import rastrigin_func_ndim, func_exception
 
 
+
 if __name__ == '__main__':
 
-    psdd = get_psdd(
-        n_dim=  2,
-        rng=    2)
+    n_dim = 2
+    param_range = 2
+    add_exceptions = True
 
     hpmser(
-        func=           rastrigin_func_ndim,
-        #func=           func_exception,
-        func_psdd=      psdd,
+        func=           func_exception if add_exceptions else rastrigin_func_ndim,
+        func_psdd=      get_psdd(n_dim=n_dim, rng=param_range),
         func_const=     {'sleep':None},
         devices=        [None]*20,
         n_loops=        500,
-        #plot_axes=      ['p1','p2'],
-    )
+        plot_axes=      ['p1','p2'])
