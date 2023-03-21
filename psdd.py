@@ -1,4 +1,4 @@
-from pypaq.pms.paspa import PSDD
+from pypaq.pms.space.paspa import PSDD
 
 
 # prepares parameters_space_definition_dict (PSDD)
