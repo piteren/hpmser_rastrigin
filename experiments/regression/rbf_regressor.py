@@ -1,5 +1,5 @@
 import numpy as np
-from pypaq.pms.space.space_estimator import RBFRegressor
+from hpmser.space_estimator import RBFRegressor
 import time
 
 from function import rastrigin_func_ndim

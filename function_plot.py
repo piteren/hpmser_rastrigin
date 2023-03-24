@@ -1,6 +1,6 @@
 import time
 from hpmser.search_results import SRL
-from pypaq.pms.space.paspa import PaSpa
+from pypaq.pms.paspa import PaSpa
 from tqdm import tqdm
 
 from function import rastrigin_func_ndim
