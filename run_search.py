@@ -1,4 +1,4 @@
-from hpmser.search import hpmser
+from hpmser.search import HPMSer
 from pypaq.pms.paspa import PaSpa
 from pypaq.lipytools.plots import three_dim
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     #plot_psdd(psdd=psdd, func_const=func_const, n_samples=100)
     #plot_psdd(psdd=psdd, func_const=func_const, n_samples=1000)
 
-    hpmser(
+    HPMSer(
         func=       func_exception if add_exceptions else rastrigin_func_ndim,
         func_psdd=  psdd,
         func_const= func_const,
