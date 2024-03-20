@@ -35,8 +35,8 @@ if __name__ == '__main__':
     psdd = get_psdd(n_dim=n_dim, rng=param_range)
     func_const = {'a':0.5, 'flatten':flatten, 'random_offset':random_offset, 'sleep':sleep}
 
-    #plot_psdd(psdd=psdd, func_const=func_const, n_samples=100)
-    #plot_psdd(psdd=psdd, func_const=func_const, n_samples=1000)
+    plot_psdd(psdd=psdd, func_const=func_const, n_samples=100)
+    plot_psdd(psdd=psdd, func_const=func_const, n_samples=1000)
 
     HPMSer(
         func=       func_exception if add_exceptions else rastrigin_func_ndim,
